@@ -52,4 +52,20 @@ public class UserJasonTest {
                     .body("endereco.rua", is("Rua dos bobos")); //rua é um atributo de endereço por isso se usa
                                                                         // endereco.rua
     }
+
+    @Test
+    public void deveVerificarLista() {
+        given()
+                .when()
+                    .get("http://restapi.wcaquino.me/users/3")
+                .then()
+                    .statusCode(200)
+                    .body("name", containsString("Ana"))
+                    .body("filhos", hasSize(2))
+                    .body("filhos[0].name", is("Zezinho"))//para testar os atibutos da lista acessar a posição.
+                    .body("filhos[1].name", is("Luizinho"))
+                    .body("filhos.name", hasItem("Zezinho"))
+                    .body("filhos.name", hasItems("Zezinho", "Luizinho"))
+        ;
+    }
 }
