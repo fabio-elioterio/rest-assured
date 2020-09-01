@@ -4,12 +4,11 @@ import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserJasonTest {
 
@@ -39,5 +38,18 @@ public class UserJasonTest {
         //from
         int id = JsonPath.from(response.asString()).getInt("id");
         assertEquals(1, id);
+    }
+
+    @Test
+    public void deveVerificarSegundoNivel() {
+
+        given()
+                .when()
+                    .get("http://restapi.wcaquino.me/users/2")
+                .then()
+                    .statusCode(200)
+                    .body("name", containsString("Joaquina"))
+                    .body("endereco.rua", is("Rua dos bobos")); //rua é um atributo de endereço por isso se usa
+                                                                        // endereco.rua
     }
 }
