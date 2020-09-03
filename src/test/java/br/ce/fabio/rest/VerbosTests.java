@@ -1,7 +1,6 @@
 package br.ce.fabio.rest;
 
 import io.restassured.http.ContentType;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -9,7 +8,8 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class VerbosTests {
 
